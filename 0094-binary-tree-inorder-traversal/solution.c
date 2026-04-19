@@ -1,22 +1,27 @@
-int* inorderTraversal(struct TreeNode* root, int* returnSize) {
-    int* result = malloc(10000 * sizeof(int));
-    struct TreeNode* stack[10000];
+int* result;
+int capacity;
 
-    int top = -1, index = 0;
-    struct TreeNode* curr = root;
+void inorder(struct TreeNode* root, int* returnSize) {
+    if (!root) return;
 
-    while (curr != NULL || top != -1) {
-        while (curr != NULL) {
-            stack[++top] = curr;
-            curr = curr->left;
-        }
+    inorder(root->left, returnSize);
 
-        curr = stack[top--];
-        result[index++] = curr->val;
-
-        curr = curr->right;
+    if (*returnSize >= capacity) {
+        capacity *= 2;
+        result = realloc(result, sizeof(int) * capacity);
     }
 
-    *returnSize = index;
+    result[(*returnSize)++] = root->val;
+
+    inorder(root->right, returnSize);
+}
+
+int* inorderTraversal(struct TreeNode* root, int* returnSize) {
+    capacity = 100;
+    result = malloc(sizeof(int) * capacity);
+    *returnSize = 0;
+
+    inorder(root, returnSize);
+
     return result;
 }
