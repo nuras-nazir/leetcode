@@ -1,25 +1,20 @@
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
-#include <stdlib.h>
+void merge(int* nums, int l, int m, int r) {
 
-void merge(int* nums, int left, int mid, int right)
-{
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+    int n1 = m - l + 1;
+    int n2 = r - m;
 
-    int* L = (int*)malloc(n1 * sizeof(int));
-    int* R = (int*)malloc(n2 * sizeof(int));
+    int L[n1], R[n2];
 
     for(int i = 0; i < n1; i++)
-        L[i] = nums[left + i];
-    for(int j = 0; j < n2; j++)
-        R[j] = nums[mid + 1 + j];
+        L[i] = nums[l + i];
 
-    int i = 0, j = 0, k = left;
+    for(int i = 0; i < n2; i++)
+        R[i] = nums[m + 1 + i];
 
-    while(i < n1 && j < n2)
-    {
+    int i = 0, j = 0, k = l;
+
+    while(i < n1 && j < n2) {
+
         if(L[i] <= R[j])
             nums[k++] = L[i++];
         else
@@ -31,21 +26,19 @@ void merge(int* nums, int left, int mid, int right)
 
     while(j < n2)
         nums[k++] = R[j++];
-
-    free(L);
-    free(R);
 }
 
-void mergeSort(int* nums, int left, int right)
-{
-    if(left >= right) return;
+void mergeSort(int* nums, int l, int r) {
 
-    int mid = left + (right - left)/2;
+    if(l < r) {
 
-    mergeSort(nums, left, mid);
-    mergeSort(nums, mid+1, right);
+        int m = (l + r) / 2;
 
-    merge(nums, left, mid, right);
+        mergeSort(nums, l, m);
+        mergeSort(nums, m + 1, r);
+
+        merge(nums, l, m, r);
+    }
 }
 
 int* sortArray(int* nums, int numsSize, int* returnSize) {
@@ -53,5 +46,6 @@ int* sortArray(int* nums, int numsSize, int* returnSize) {
     mergeSort(nums, 0, numsSize - 1);
 
     *returnSize = numsSize;
+
     return nums;
 }
