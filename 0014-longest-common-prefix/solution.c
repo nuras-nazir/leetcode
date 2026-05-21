@@ -1,23 +1,21 @@
-#include <string.h>
-
 char* longestCommonPrefix(char** strs, int strsSize) {
-    if (strsSize == 0) return "";
 
-    char* prefix = strs[0];  // assume first string is prefix
+    if(strsSize == 0)
+        return "";
 
-    for (int i = 1; i < strsSize; i++) {
-        int j = 0;
+    for(int i = 0; strs[0][i]; i++) {
 
-        // compare prefix with current string
-        while (prefix[j] && strs[i][j] && prefix[j] == strs[i][j]) {
-            j++;
+        char ch = strs[0][i];
+
+        for(int j = 1; j < strsSize; j++) {
+
+            if(strs[j][i] != ch) {
+
+                strs[0][i] = '\0';
+                return strs[0];
+            }
         }
-
-        prefix[j] = '\0';  // cut prefix here
-
-        if (prefix[0] == '\0')
-            return "";  // no common prefix
     }
 
-    return prefix;
+    return strs[0];
 }
