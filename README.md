@@ -20,4 +20,16 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0344-reverse-string](https://github.com/nuras-nazir/leetcode/tree/master/0344-reverse-string) |
+## Math
+|  |
+| ------- |
+| [0069-sqrtx](https://github.com/nuras-nazir/leetcode/tree/master/0069-sqrtx) |
+## Binary Search
+|  |
+| ------- |
+| [0069-sqrtx](https://github.com/nuras-nazir/leetcode/tree/master/0069-sqrtx) |
+## Newton's Method
+|  |
+| ------- |
+| [0069-sqrtx](https://github.com/nuras-nazir/leetcode/tree/master/0069-sqrtx) |
 <!---LeetCode Topics End-->
