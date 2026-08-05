@@ -16,5 +16,5 @@ struct ListNode* deleteDuplicates(struct ListNode* head) {
         }
     }
 
-    return head;
+    return head; 
 }
